@@ -7,7 +7,7 @@
     <title>Login</title>
 </head>
 <body>
-    <form class="sign-in" action="{{ url('login') }}" method="post">
+    <form class="sign-in" action="{{ url('index') }}" method="post">
         @csrf
         <h2>Identifiant</h2>
         <input class="inputs" type="text" name="ID" required>
