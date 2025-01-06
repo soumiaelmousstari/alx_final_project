@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-// use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\Session;
-// use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Etudiants;
 
 class logicontroller extends Controller
 {
-    // Afficher le formulaire de connexion
     public function showLoginForm()
     {
         return view('index');
@@ -19,48 +18,38 @@ class logicontroller extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout(); // Déconnecte l'utilisateur
-        $request->session()->invalidate(); // Invalide la session
-        $request->session()->regenerateToken(); // Regénère le token CSRF
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return redirect()->route('login'); // Redirige vers la page de connexion
+        return redirect()->route('login');
     }
 
     public function login(Request $request)
-{
-    $credentials = $request->only('ID', 'pass');
-
-    // Exemple de validation des identifiants
-    if ($credentials['ID'] === 'soumia' && $credentials['pass'] === 'soumia') {
-        // Redirection vers la page index après un succès
-        return redirect()->route('index');
-    } else {
-        // Retour à la page de login avec une erreur
+    {
+        $request->validate([
+            'ID' => 'required|string',
+            'pass' => 'required|string',
+        ]);
+        $user = Etudiants::where('user_id', $request->ID)->first();
+    
+        if ($user) {
+            if (Hash::check($request->pass, $user->password)) {
+                Auth::login($user);
+                return redirect()->route('affichage');
+            }
+        }
+    
         return back()->withErrors(['login_error' => 'Identifiants invalides.']);
     }
+    public function showAffichage()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $etudiants = Etudiants::where('valide', 1)->get();
+
+        return view('affichage', compact('etudiants'));
+    }
 }
-    // Gérer la connexion
-    // public function login(Request $request)
-    // {
-    //     // Validation des données
-    //     $request->validate([
-    //         'ID' => 'required|string',
-    //         'mot_de_passe' => 'required|string',
-    //     ]);
-
-    //     // Vérifier si l'utilisateur existe dans la base de données
-    //     $user = DB::table('utilisateur')->where('login', $request->input('ID'))->first();
-
-    //     if ($user && Hash::check($request->input('pass'), $user->mot_de_passe)) {
-    //         // L'utilisateur existe et le mot de passe est correct
-    //         Session::put('permission', $user->categorie);
-    //         Session::put('user_id', $user->id);
-    //         Session::put('user_name', $user->login);
-
-    //         return redirect()->route('login');
-    //     } else {
-    //         return back()->withErrors(['login_error' => 'Mot de passe ou identifiant incorrect']);
-    //     }
-    // }
-}
-
