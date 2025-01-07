@@ -7,7 +7,7 @@ body{
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: linear-gradient(burlywood,transparent);
+    background: rgb(245, 211, 167);
 }
 .sign-in{
     margin-top: 12rem;

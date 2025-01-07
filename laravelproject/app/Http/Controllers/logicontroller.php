@@ -7,15 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Etudiants;
+use App\Models\Etudiant;
+use App\Models\Utilisateur;
 
 class logicontroller extends Controller
 {
-    public function showLoginForm()
-    {
-        return view('index');
-    }
-
     public function logout(Request $request)
     {
         Auth::logout();
@@ -31,8 +27,7 @@ class logicontroller extends Controller
             'ID' => 'required|string',
             'pass' => 'required|string',
         ]);
-        $user = Etudiants::where('user_id', $request->ID)->first();
-    
+        $user = Utilisateur::where('login', $request->ID)->first();
         if ($user) {
             if (Hash::check($request->pass, $user->password)) {
                 Auth::login($user);
@@ -42,14 +37,54 @@ class logicontroller extends Controller
     
         return back()->withErrors(['login_error' => 'Identifiants invalides.']);
     }
-    public function showAffichage()
+
+    public function showForm(Request $request)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
+        $etudiant = null;
+
+        if ($request->has('id_to_modify')) {
+            $etudiant = Etudiant::find($request->id_to_modify);
         }
 
-        $etudiants = Etudiants::where('valide', 1)->get();
+        return view('nouveau', compact('etudiant'));
+    }
 
+    public function handleForm(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nom_etu' => 'required|string|max:255',
+            'note_math' => 'required|numeric',
+            'note_info' => 'required|numeric',
+        ]);
+        
+        if ($request->has('id_to_modify')) {
+            $etudiant = Etudiant::find($request->id_to_modify);
+            $etudiant->nom = $validatedData['nom_etu'];
+            $etudiant->math = $validatedData['note_math'];
+            $etudiant->info = $validatedData['note_info'];
+            $etudiant->save();
+        } elseif ($request->has('id_to_sup'))
+        {
+            $etudiant = Etudiant::find($request->id_to_sup);
+            if ($etudiant) {
+                $etudiant->delete();
+            }else{
+                dd('Étudiant non trouvé');
+            }
+        } else {
+            $etudiant = new Etudiant();
+            $etudiant->nom = $validatedData['nom_etu'];
+            $etudiant->math = $validatedData['note_math'];
+            $etudiant->info = $validatedData['note_info'];
+            $etudiant->save();
+        }
+    
+        return redirect()->route('affichage');
+    }
+
+    public function showAffichage()
+    {
+        $etudiants = Etudiant::where('valide', 1)->get();
         return view('affichage', compact('etudiants'));
     }
 }

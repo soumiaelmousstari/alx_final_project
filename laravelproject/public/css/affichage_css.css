@@ -4,7 +4,7 @@
 
 body {
     margin: 0;
-    background: linear-gradient(burlywood, transparent);
+    background: rgb(245, 211, 167);
     font-family: 'Monospace', sans-serif;
     font-size: large;
     position: relative;
@@ -16,7 +16,7 @@ h1, h2 {
     color: black;
 }
 
-a {
+#a1 {
     position: absolute;
     right: 2%; /* Ajustez ce pourcentage pour un décalage plus ou moins grand */
     top: 2%;  /* Vous pouvez aussi ajuster la position verticale */
@@ -26,7 +26,49 @@ a {
     border: none;
     background: black;
     color: white;
+    /* width: 6%; */
     padding: 0.5rem 1.5rem;
+}
+
+#a2 {
+    position: absolute;
+    right: 10%; /* Ajustez ce pourcentage pour un décalage plus ou moins grand */
+    top: 2%;  /* Vous pouvez aussi ajuster la position verticale */
+    border-radius: 10px;
+    font: inherit;
+    cursor: pointer;
+    border: none;
+    background: black;
+    color: white;
+    padding: 0.5rem 2rem;
+}
+
+
+#a3 {
+    /* position: absolute; */
+    /* right: 2%; Ajustez ce pourcentage pour un décalage plus ou moins grand */
+    /* top: %;  Vous pouvez aussi ajuster la position verticale */
+    border-radius: 10px;
+    font: inherit;
+    cursor: pointer;
+    border: none;
+    background: black;
+    color: white;
+    /* width: 6%; */
+    padding: 0.5rem 1.5rem;
+}
+
+#a4 {
+    /* position: absolute; */
+    /* right: 10%; Ajustez ce pourcentage pour un décalage plus ou moins grand */
+    /* top: 2%;  Vous pouvez aussi ajuster la position verticale */
+    border-radius: 10px;
+    font: inherit;
+    cursor: pointer;
+    border: none;
+    background: black;
+    color: white;
+    padding: 0.5rem 2rem;
 }
 
 /* a:hover {
@@ -189,6 +231,9 @@ a {
 table {
     width: 100%;
     margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px white;
+    /* background: lightyellow; */
     border-collapse: collapse;
 }
 

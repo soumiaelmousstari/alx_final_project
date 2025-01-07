@@ -1,14 +1,15 @@
-<!-- resources/views/affichage.blade.php -->
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-    @vite('public/css/affichage_css.css')
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('css/affichage_css.css') }}">
+    <title>Liste des Étudiants</title>
 </head>
-@if (Auth::check())
-    <!-- <h1>Welcome, {{ Auth::user()->nom }}</h1> -->
-
-    <a href="{{ route('logout') }}">Logout</a>
-    <a href="{{ route('logout') }}">New</a>
-
-    <h2>Student List</h2>
+<body>
+    <a id="a1" href="{{ route('logout') }}">Logout</a>
+    <a id="a2" href="{{ url('nouveau') }}">New</a>
+    <h1>Liste des Étudiants</h1>
     <table>
         <thead>
             <tr>
@@ -20,21 +21,20 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($etudiants as $etudiant)
+            @foreach($etudiants as $etudiant)
                 <tr>
                     <td>{{ $etudiant->nom }}</td>
                     <td>{{ $etudiant->math }}</td>
                     <td>{{ $etudiant->info }}</td>
-                    <td>{{ ($etudiant->math + $etudiant->info) / 2 }}</td>
+                    <td>{{ $moyenne = ($etudiant->math + $etudiant->info) / 2 }}</td>
                     <td>
                         @php
-                            $moyenne = ($etudiant->math + $etudiant->info) / 2;
                             if ($moyenne >= 16) {
                                 $mention = 'Très Bien';
                             } elseif ($moyenne >= 14) {
                                 $mention = 'Bien';
                             } elseif ($moyenne >= 12) {
-                                $mention = 'A Bien';
+                                $mention = 'Assez Bien';
                             } elseif ($moyenne >= 10) {
                                 $mention = 'Passable';
                             } else {
@@ -43,10 +43,18 @@
                         @endphp
                         {{ $mention }}
                     </td>
+                    <td>
+                        <a id="a3" href="{{ url('nouveau?id_to_modify=' . $etudiant->id) }}">M</a>
+                        <form action="{{ url('affichage') }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="id_to_sup" value="{{ $etudiant->id }}">
+                            <button type="submit" id="a4">S</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-@else
-    <p>You are not logged in. Please <a href="{{ route('index') }}">login</a>.</p>
-@endif
+</body>
+</html>
