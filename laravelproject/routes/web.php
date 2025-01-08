@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\logicontroller;
 use Illuminate\Support\Facades\Route;
-use App\Models\Etudiant;
-use App\Models\Utilisateur;
 
 Route::get('affichage', [logicontroller::class, 'showAffichage'])->name('affichage');
 Route::delete('affichage/{id}', [logicontroller::class, 'deleteEtudiant'])->name('etudiant.delete');

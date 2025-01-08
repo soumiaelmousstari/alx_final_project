@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Etudiant;
 use App\Models\Utilisateur;
-use Barryvdh\DomPDF\Facade as PDF;
+use FPDF;
 
 class logicontroller extends Controller
 {
@@ -111,12 +111,23 @@ class logicontroller extends Controller
         } elseif ($moyenne >= 14 && $moyenne < 16) {
             $mention = "Bien";
         } elseif ($moyenne >= 16 && $moyenne <= 20) {
-            $mention = "Très Bien";
+            $mention = "Tres Bien";
         } else {
             $mention = "Non Admis";
         }
-        $pdf = PDF::loadView('pdf.bulletin', compact('etudiant', 'moyenne', 'mention'));
-        return $pdf->stream('Bulletin.pdf');
+        $pdf = new FPDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(0, 10, 'Bulletin de Notes de l\'Etudiant', 0, 1, 'C');
+        $pdf->Ln(10);
+        $pdf->Cell(0, 10, 'Nom: ' . $etudiant->nom, 0, 1);
+        $pdf->Cell(0, 10, 'Note en Mathematiques: ' . $etudiant->math, 0, 1);
+        $pdf->Cell(0, 10, 'Note en Informatique: ' . $etudiant->info, 0, 1);
+        $pdf->Cell(0, 10, 'Moyenne: ' . number_format($moyenne, 2), 0, 1);
+        $pdf->Cell(0, 10, 'Mention: ' . $mention, 0, 1);
+        return response($pdf->Output('natija.pdf', 'S'))
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'inline; filename="natija.pdf"');
     }
 
     public function showAffichage()
