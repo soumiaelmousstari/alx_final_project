@@ -1,85 +1,106 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-body{
-    margin:0;
+body {
+    margin: 0;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(burlywood,transparent);
+    background: linear-gradient(burlywood, transparent);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
 
-.add{
+.add {
     display: grid;
     width: 80%;
-    grid-template-columns: 20% 20%;
-    padding: 1rem;
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem;
     margin: 0;
     font-family: monospace;
-    font-size: large;
+    font-size: 1.2rem;
     font-weight: 900;
     justify-content: center;
     align-items: center;
-    grid-row-gap: 0.5rem;
+    grid-gap: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.add:hover {
+    transform: translateY(-5px);
 }
 
 .add input[type="text"],
 .add input[type="email"],
-.add input[type="number"]{
-    padding: 0.5rem;
+.add input[type="number"] {
+    padding: 1rem;
     border: none;
-    background: lightyellow;
-    border-radius: 5px;
+    background: #fff9c4;
+    border-radius: 6px;
     font-family: monospace;
-    font-size: large;
+    font-size: 1.1rem;
+    color: #555;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
 }
 
 .add input[type="text"]:focus,
 .add input[type="email"]:focus,
-.add input[type="number"]:focus{
+.add input[type="number"]:focus {
     outline: none;
+    border: 2px solid #ff9800;
+    box-shadow: 0 0 8px rgba(255, 152, 0, 0.5);
 }
 
-.add input[type="number"]::-webkit-inner-spin-button{
+.add input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-.button-container{
+.button-container {
     grid-column: span 2;
     display: flex;
     justify-content: space-around;
+    gap: 1rem;
 }
 
-.href{
+.href {
     display: contents;
 }
 
-.button{
+.button {
     cursor: pointer;
-    box-shadow: 0px 0px 0px 1px white;
-    border-radius: 10px;
+    padding: 1rem;
+    background: #ff9800;
+    border-radius: 8px;
     font-family: monospace;
-    font-size: large;
-    font-weight: 900;
-    padding: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
     border: none;
-    width: 35%;
-    background: center;
+    width: 45%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    color: white;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
-.button:hover{
-    background: lightyellow;
+.button:hover {
+    background: #ff5722;
+    transform: translateY(-3px);
 }
 
-.button:focus{
+.button:focus {
     outline: none;
 }
 
-p{
+p {
     width: 80%;
     font-family: monospace;
-    font-size: large;
-    margin: 0;
-    color: red;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    color: #e74c3c;
     text-align: center;
 }

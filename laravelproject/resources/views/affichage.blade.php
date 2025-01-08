@@ -44,13 +44,15 @@
                         {{ $mention }}
                     </td>
                     <td>
-                        <a id="a3" href="{{ url('nouveau?id_to_modify=' . $etudiant->id) }}">M</a>
-                        <form action="{{ url('affichage') }}" method="POST" style="display:inline;">
+                        <a id="a3" href="{{ route('etudiant.show' , $etudiant->id) }}">M</a>
+                        @csrf
+                        @method('PUT')
+                        <form action="{{ route('etudiant.delete', $etudiant->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <input type="hidden" name="id_to_sup" value="{{ $etudiant->id }}">
                             <button type="submit" id="a4">S</button>
                         </form>
+                        <a id="a5" href="{{ route('etudiant.bulletin', $etudiant->id) }}">I</a>
                     </td>
                 </tr>
             @endforeach

@@ -4,290 +4,89 @@
 
 body {
     margin: 0;
+    display: flex;
+    flex-direction: column;
     background: rgb(245, 211, 167);
-    font-family: 'Monospace', sans-serif;
-    font-size: large;
-    position: relative;
-    padding: 20px;
-}
-
-h1, h2 {
-    text-align: center;
-    color: black;
-}
-
-#a1 {
-    position: absolute;
-    right: 2%; /* Ajustez ce pourcentage pour un décalage plus ou moins grand */
-    top: 2%;  /* Vous pouvez aussi ajuster la position verticale */
-    border-radius: 10px;
-    font: inherit;
-    cursor: pointer;
-    border: none;
-    background: black;
-    color: white;
-    /* width: 6%; */
-    padding: 0.5rem 1.5rem;
-}
-
-#a2 {
-    position: absolute;
-    right: 10%; /* Ajustez ce pourcentage pour un décalage plus ou moins grand */
-    top: 2%;  /* Vous pouvez aussi ajuster la position verticale */
-    border-radius: 10px;
-    font: inherit;
-    cursor: pointer;
-    border: none;
-    background: black;
-    color: white;
-    padding: 0.5rem 2rem;
-}
-
-
-#a3 {
-    /* position: absolute; */
-    /* right: 2%; Ajustez ce pourcentage pour un décalage plus ou moins grand */
-    /* top: %;  Vous pouvez aussi ajuster la position verticale */
-    border-radius: 10px;
-    font: inherit;
-    cursor: pointer;
-    border: none;
-    background: black;
-    color: white;
-    /* width: 6%; */
-    padding: 0.5rem 1.5rem;
-}
-
-#a4 {
-    /* position: absolute; */
-    /* right: 10%; Ajustez ce pourcentage pour un décalage plus ou moins grand */
-    /* top: 2%;  Vous pouvez aussi ajuster la position verticale */
-    border-radius: 10px;
-    font: inherit;
-    cursor: pointer;
-    border: none;
-    background: black;
-    color: white;
-    padding: 0.5rem 2rem;
-}
-
-/* a:hover {
-    color: white;
-    background: black;
-    padding: 0.2rem 0.5rem;
-    border-radius: 5px;
-} */
-
-.creation button {
-    position: absolute;
-    left: 5%;
-    top: 2%;
-    border-radius: 10px;
-    font: inherit;
-    cursor: pointer;
-    border: none;
-    background: black;
-    color: white;
-    padding: 0.5rem 1.5rem;
-}
-
-.creation .hi {
-    position: absolute;
-    left: 23%;
-    top: 2%;
-    border-radius: 10px;
-    font: inherit;
-    cursor: pointer;
-    border: none;
-    background: black;
-    padding: 0.5rem 1.5rem;
-}
-
-.hi {
-    color: white;
-    text-decoration: none;
-}
-
-.creation .hi:hover {
-    color: black;
-    background: white;
-}
-
-.creation button:hover {
-    color: black;
-    background: white;
-}
-
-.form {
-    width: 80%;
-    padding: 5rem 3rem;
-    margin: 0 auto;
-}
-
-.input-crud {
-    padding-bottom: 1rem;
-}
-
-.input-crud input {
-    box-shadow: 0px 0px 0px 1px white;
-    border-radius: 10px;
-    font: inherit;
-    cursor: pointer;
-    border: none;
-    background: center;
-    width: 8rem;
-    padding: 5px 8px;
-}
-
-.menu-container {
-    display: flex;
-}
-
-.menu {
-    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-column-gap: 6px;
-    margin-bottom: 6px;
-    width: 70%;
 }
 
-.menu-item__specify {
-    color: red;
-}
-
-.menu-item {
+h1 {
     text-align: center;
-    list-style: none;
-    width: 100%;
-    border: 1px black solid;
-    padding: 0.4rem 0;
+    font-family: 'Monospace', sans-serif;
+    font-size: 2.5rem;
+    margin-top: 2rem;
+    color: #333;
 }
 
-.button {
-    display: flex;
-    margin-bottom: 6px;
-    align-items: center;
-}
-
-.button input,
-.save-menu input {
-    box-shadow: 0px 0px 0px 1px white;
-    border-radius: 10px;
-    font: inherit;
-    cursor: pointer;
-    border: none;
-    background: center;
-    padding: 5px 8px;
-    margin: 0 4px;
-}
-
-.input-crud input:hover,
-.button input:hover,
-.save-menu input:hover {
-    background: lightyellow;
-}
-
-.backdrop {
-    display: none;
-    z-index: 1;
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.save-menu {
-    background: rgb(255, 229, 229);
-    z-index: -1;
-    opacity: 0;
-    transform: translateY(-3rem);
-    transition: opacity 0.2s, transform 0.5s;
-    display: grid;
-    justify-items: center;
-    grid-row-gap: 1rem;
-    position: fixed;
-    width: 30vw;
-    height: 30vh;
-    left: 30%;
-    top: 15%;
-    padding: 5rem;
-    font-size: x-large;
-}
-
-.save-menu input {
-    font-size: x-large;
-}
-
-.save {
-    z-index: 2;
-    display: grid;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Table Styling for Blade View */
 table {
-    width: 100%;
-    margin-top: 20px;
-    border-radius: 10px;
-    box-shadow: 10px 10px 10px white;
-    /* background: lightyellow; */
+    width: 80%;
+    margin: 2rem auto;
     border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid black;
+    font-family: 'Monospace', sans-serif;
+    font-size: 1.1rem;
 }
 
 th, td {
-    padding: 10px;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
     text-align: center;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: rgb(243, 177, 90);
+    color: white;
 }
 
-td {
-    background-color: #fafafa;
+tr:nth-child(even) {
+    background-color: #f9f3e4;
 }
 
-@media screen and (max-width: 768px) {
-    .menu {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .form {
-        padding: 2rem;
-    }
-
-    .save-menu {
-        width: 80vw;
-        height: 50vh;
-        top: 20%;
-        left: 10%;
-    }
+#a1, #a2 {
+    font-family: 'Monospace', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-decoration: none;
+    padding: 0.8rem;
+    color: #ff9800;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin: 0.5rem;
 }
 
-@media screen and (max-width: 480px) {
-    .creation button, .creation .hi {
-        width: 100%;
-        left: 0;
-        top: 0;
-        position: relative;
-        margin-bottom: 1rem;
-    }
+#a1:hover, #a2:hover {
+    background: lightyellow;
+    transform: translateY(-3px);
+}
 
-    .menu {
-        grid-template-columns: 1fr;
-    }
+#a1 {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+}
 
-    .save-menu {
-        width: 90vw;
-        height: 60vh;
-        top: 25%;
-        left: 5%;
-    }
+#a2 {
+    position: absolute;
+    top: 2rem;
+    right: 8rem;
+}
+
+a {
+    text-decoration: none;
+    color: #ff9800;
+}
+
+#a4 {
+    text-decoration: none;
+    color: #ff9800;
+    font-size: 17px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#a3:hover, #a4:hover, #a5:hover {
+    background: lightyellow;
+    transform: translateY(-3px);
+    font-size: 20px;
 }

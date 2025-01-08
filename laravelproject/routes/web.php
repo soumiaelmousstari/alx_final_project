@@ -6,11 +6,15 @@ use App\Models\Etudiant;
 use App\Models\Utilisateur;
 
 Route::get('affichage', [logicontroller::class, 'showAffichage'])->name('affichage');
-Route::post('affichage', [logicontroller::class, 'handleForm'])->name('affichage.handle');
-Route::delete('affichage', [logicontroller::class, 'handleForm'])->name('affichage.handle');
+Route::delete('affichage/{id}', [logicontroller::class, 'deleteEtudiant'])->name('etudiant.delete');
+Route::post('affichage', [logicontroller::class, 'login'])->name('login.post');
 Route::get('/logout', [logicontroller::class, 'logout'])->name('logout');
-Route::get('/nouveau', [logicontroller::class, 'showForm'])->name('nouveau');
-Route::post('/nouveau', [logicontroller::class, 'handleForm'])->name('etudiant.handle');
+Route::get('/nouveau', [logicontroller::class, 'showFormall'])->name('nouveau');
+Route::post('/nouveau', [logicontroller::class, 'addEtudiant'])->name('etudiant.add');
+Route::put('/nouveau', [logicontroller::class, 'addEtudiant'])->name('etudiant.add');
+Route::put('/update/{id}', [logicontroller::class, 'updateEtudiant'])->name('etudiant.update');
+Route::get('/update/{id}', [logicontroller::class, 'showForm'])->name('etudiant.show');
+Route::get('/bulletin/{id}', [logicontroller::class, 'generatePDF'])->name('etudiant.bulletin');
 Route::get('/login', function() {
     return view('login');
 })->name('login');

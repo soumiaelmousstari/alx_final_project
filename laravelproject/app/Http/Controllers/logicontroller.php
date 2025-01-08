@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Etudiant;
 use App\Models\Utilisateur;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class logicontroller extends Controller
 {
@@ -38,7 +37,7 @@ class logicontroller extends Controller
         return back()->withErrors(['login_error' => 'Identifiants invalides.']);
     }
 
-    public function showForm(Request $request)
+    public function showFormall(Request $request)
     {
         $etudiant = null;
 
@@ -49,37 +48,75 @@ class logicontroller extends Controller
         return view('nouveau', compact('etudiant'));
     }
 
-    public function handleForm(Request $request)
+    public function showForm($id)
+    {
+        $etudiant = Etudiant::find($id);
+        return view('nouveau', compact('etudiant'));
+    }
+
+    public function addEtudiant(Request $request)
     {
         $validatedData = $request->validate([
             'nom_etu' => 'required|string|max:255',
-            'note_math' => 'required|numeric',
-            'note_info' => 'required|numeric',
-        ]);
-        
-        if ($request->has('id_to_modify')) {
-            $etudiant = Etudiant::find($request->id_to_modify);
-            $etudiant->nom = $validatedData['nom_etu'];
-            $etudiant->math = $validatedData['note_math'];
-            $etudiant->info = $validatedData['note_info'];
-            $etudiant->save();
-        } elseif ($request->has('id_to_sup'))
-        {
-            $etudiant = Etudiant::find($request->id_to_sup);
-            if ($etudiant) {
-                $etudiant->delete();
-            }else{
-                dd('Étudiant non trouvé');
-            }
-        } else {
-            $etudiant = new Etudiant();
-            $etudiant->nom = $validatedData['nom_etu'];
-            $etudiant->math = $validatedData['note_math'];
-            $etudiant->info = $validatedData['note_info'];
-            $etudiant->save();
-        }
-    
+            'note_math' => 'required|numeric|min:0|max:20',
+            'note_info' => 'required|numeric|min:0|max:20',
+        ]);     
+        $etudiant = new Etudiant();
+        $etudiant->nom = $validatedData['nom_etu'];
+        $etudiant->math = $validatedData['note_math'];
+        $etudiant->info = $validatedData['note_info'];
+        $etudiant->save();
         return redirect()->route('affichage');
+    }
+
+    public function updateEtudiant(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'nom_etu' => 'required|string|max:255',
+            'note_math' => 'required|numeric|min:0|max:20',
+            'note_info' => 'required|numeric|min:0|max:20',
+        ]);     
+        $etudiant = Etudiant::find($id);
+        if ($etudiant)
+        {
+            $etudiant->nom = $validatedData['nom_etu'];
+            $etudiant->math = $validatedData['note_math'];
+            $etudiant->info = $validatedData['note_info'];
+            $etudiant->save();
+        } else {
+            return redirect()->back()->withErrors(['error' => 'Étudiant non trouvé.']);
+        }
+        return redirect()->route('affichage');
+    }
+
+    public function deleteEtudiant($id)
+    {
+        $etudiant = Etudiant::find($id);
+        if ($etudiant) {
+            $etudiant->delete();
+        }else{
+            dd('Étudiant non trouvé');
+        }
+        return redirect()->route('affichage');
+    }
+
+    public function generatePDF($bulletin_id)
+    {
+        $etudiant = Etudiant::findOrFail($bulletin_id);
+        $moyenne = ($etudiant->math + $etudiant->info) / 2;
+        if ($moyenne >= 10 && $moyenne < 12) {
+            $mention = "Passable";
+        } elseif ($moyenne >= 12 && $moyenne < 14) {
+            $mention = "Assez Bien";
+        } elseif ($moyenne >= 14 && $moyenne < 16) {
+            $mention = "Bien";
+        } elseif ($moyenne >= 16 && $moyenne <= 20) {
+            $mention = "Très Bien";
+        } else {
+            $mention = "Non Admis";
+        }
+        $pdf = PDF::loadView('pdf.bulletin', compact('etudiant', 'moyenne', 'mention'));
+        return $pdf->stream('Bulletin.pdf');
     }
 
     public function showAffichage()
