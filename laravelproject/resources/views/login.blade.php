@@ -16,7 +16,9 @@
         <input class="valider" type="submit" value="Valider" name="Valider">
     </form>
     @if ($errors->any())
-        <p>{{ $errors->first('login_error') }}</p>
+        <script>
+            alert("{{ $errors->first('login_error') }}");
+        </script>
     @endif
 </body>
 </html>

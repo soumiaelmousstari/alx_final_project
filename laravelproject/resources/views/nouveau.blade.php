@@ -18,7 +18,7 @@
     </script>
 </head>
 <body>
-<form class="add" action="{{ isset($etudiant) ? route('etudiant.update', $etudiant->id) : route('etudiant.add') }}" method="POST">
+<form class="add" action="{{ isset($etudiant) ? route('etudiant.update', $etudiant->id) : route('etudiant.add') }}" method="POST" onsubmit="validateForm(event)">
     @csrf
     @if(isset($etudiant))
         @method('PUT')
