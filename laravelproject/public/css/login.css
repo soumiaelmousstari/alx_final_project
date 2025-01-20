@@ -5,27 +5,33 @@
 body {
     margin: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     background: rgb(245, 211, 167);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .sign-in {
-    margin-top: 5rem;
+    position: relative;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-rows: auto;
-    gap: 1.5rem;
-    align-items: center;
-    border-radius: 12px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-    background-color: #fff;
+    width: 60%;
+    grid-template-columns: 1fr 1fr;
     padding: 2rem;
-    width: 28rem;
-    transition: all 0.3s ease;
+    margin: 0;
+    font-family: monospace;
+    font-size: 1.2rem;
+    font-weight: 900;
+    justify-content: center;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    align-items: center;
+    grid-gap: 1rem;
+    background-color: rgb(248, 232, 210);
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
 }
 
 .sign-in:hover {
@@ -47,13 +53,24 @@ p {
     text-align: center;
 }
 
-.sign-in input[type="submit"] {
+.button-container {
+    grid-column: span 2;
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.href {
+    display: contents;
+}
+
+.button {
     grid-column: span 1;
     padding: 1rem;
     background: #ff9800;
     border: none;
     font: inherit;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     cursor: pointer;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
@@ -65,9 +82,13 @@ p {
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
-.sign-in input[type="submit"]:hover {
+.button:hover {
     background: #ff5722;
     transform: translateY(-3px);
+}
+
+.button:focus {
+    outline: none;
 }
 
 .inputs {
@@ -92,3 +113,34 @@ p {
     box-shadow: 0 0 5px rgba(255, 152, 0, 0.5);
 }
 
+.href_pass {
+    position: absolute; /* Position absolue pour déplacer le lien */
+    right: 32px; /* Décalage du côté droit */
+    top: 68%; /* Centré verticalement par rapport au formulaire */
+    transform: translateY(-50%); /* Correction pour le centrage vertical */
+    font-size: 14px;
+    color: #ff9800;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.href_pass:hover {  
+    color: #ff5722;
+}
+
+.close-button {
+    position: absolute;
+    top: 2px;
+    right: 14px;
+    font-size: 3rem;
+    color: #ff9800;
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-weight: bold;
+}
+
+.close-button:hover {
+    color: #ff5722;
+}
