@@ -87,6 +87,30 @@ class logicontroller extends Controller
 		return view('register');
 	}
 
+	public function forget_password(Request $request)
+	{
+		$validatedData = $request->validate([
+			'mot_utili' => 'required|string|max:255',
+			'mot_utili_reteype' => 'required|string|max:255',
+			'code_utili' => 'required|string|max:5|min:5',
+			'email_utili' => 'required|string|max:255',
+		]);
+		$access = Access::where('magic', $validatedData['code_utili'])->first();
+		if ($access)
+		{
+			$utilis = Utilisateur::where(['email' => $validatedData['email_utili']])->first();
+			if ($utilis)
+			{
+				$utilis->password = Hash::make($validatedData['mot_utili']);
+				$utilis->save();
+				return redirect()->route('login');
+			}
+			else
+				return redirect()->back()->withErrors(['email_utili' => 'Aucun utilisateur trouvé avec cet email.'])->withInput();
+		}
+		return redirect()->back()->withErrors(['code_utili' => 'Code de réinitialisation invalide.'])->withInput();;
+	}
+
 	public function addEtudiant(Request $request)
 	{
 		$validatedData = $request->validate([
@@ -181,8 +205,13 @@ class logicontroller extends Controller
 		return view('affichage', compact('etudiants'));
 	}
 
-	public function showAcceuil()
+	public function showFormLogin()
 	{
-		return view('affichage');
+		return view('login');
+	}
+
+	public function showFormForgetPasswor()
+	{
+		return view('forget_password');
 	}
 }

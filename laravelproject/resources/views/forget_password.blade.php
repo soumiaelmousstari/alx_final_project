@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
-    <link rel="stylesheet" href="{{ asset('css/acceuill.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header_footer.css') }}">
+    <title>Formulaire Étudiant</title>
+    <script>
+        function validateForm(event) {
+            const code = document.querySelector('[name="code_utili"]').value.trim();
+            const email = document.querySelector('[name="email_utili"]').value.trim();
+            const mot_de_pass = document.querySelector('[name="mot_utili"]').value.trim();
+            const mot_de_pass_retrype = document.querySelector('[name="mot_utili_reteype"]').value.trim();
+            const codeRegex = /^\d{5}$/;
+            if (!mot_de_pass_retrype || !mot_de_pass || !email || isNaN(code) || !codeRegex.test(code)) {
+                event.preventDefault();
+                if (mot_de_pass_retrype != mot_de_pass)
+                    alert("Les mots de passe ne sont pas la meme.");
+                else
+                    alert("Veuillez remplir tous les champs correctement.\n- Le nom est obligatoire.\n- Les notes doivent être des nombres entre 0 et 20.");
+            }
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -16,52 +32,31 @@
             <ul>
                 <li><a href="{{ route('acceuill') }}">Home</a></li>
                 <li><a href="{{ route('login') }}">Login</a></li>
-                <li><a href="{{ route('register') }}">Register</a></li>
                 <li><a href="{{ route('acceuill') }}#features">Features</a></li>
                 <li><a href="{{ route('acceuill') }}#how-it-works">How It Works</a></li>
-                <li><a href="{{ route('acceuill') }}#cta">Get Started</a></li>
                 <li><a href="#footer">Contact Us</a></li>
             </ul>
         </nav>
     </header>
-<main>
-    <section class="hero">
-        <h1>Welcome to Student Management</h1>
-        <p>Manage student information efficiently and securely.</p> 
-        <a href="#features" class="btn">Explore Features</a>
-    </section>
-    <section id="features" class="features">
-        <h2>Features</h2>
-        <div class="feature-items">
-            <div class="feature-item">
-                <h3>Add a Student</h3>
-                <p>Add student information, including their name and grades in IT and Mathematics.</p>
-            </div>
-            <div class="feature-item">
-                <h3>Edit or Delete</h3>
-                <p>Update or delete student records effortlessly.</p>
-            </div>
-            <div class="feature-item">
-                <h3>Generate Reports</h3>
-                <p>Create and download student reports in PDF format.</p>
-            </div>
+    <form class="add" method="POST" onsubmit="validateForm(event)">
+        @csrf
+        <label for="code_utili">Magic code</label>
+        <input type="text" id="code_utili" name="code_utili" required>
+        
+        <label for="email_utili">Email</label>
+        <input type="email" id="email_utili" name="email_utili" required>
+
+        <label for="mot_utili">New Mot de passe</label>
+        <input type="password" id="mot_utili" name="mot_utili" required>
+
+        <label for="mot_utili">Retrype New Mot de Passe</label>
+        <input type="password" id="mot_utili" name="mot_utili_reteype" required>
+
+        <div class="button-container">
+            <a class="href" href="{{ route('login') }}"><input class="button" type="button" value="Annuler"></a>
+            <input class="button" type="submit" value="Valider">
         </div>
-    </section>
-    <section id="how-it-works" class="how-it-works">
-        <h2>How It Works</h2>
-        <ol>
-            <li>Log in to your secure account.</li>
-            <li>Add or edit student information via the form.</li>
-            <li>Download student reports in one click.</li>
-        </ol>
-    </section>
-    <section id="cta" class="cta">
-        <h2>Ready to get started?</h2>
-        <p>Sign up or log in to manage student records now.</p>
-        <a href="{{ route('register') }}" class="btn">S'inscrire</a>
-        <a href="{{ route('login') }}" class="btn">Se connecter</a>
-    </section>
-</main>
+    </form>
 <footer id="footer">
     <div class="footer-container">
         <div class="footer-section">

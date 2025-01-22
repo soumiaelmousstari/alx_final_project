@@ -15,10 +15,10 @@
             </div>
             <ul>
                 <li><a href="{{ route('acceuill') }}">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#cta">Get Started</a></li>
-                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="{{ route('acceuill') }}#features">Features</a></li>
+                <li><a href="{{ route('acceuill') }}#how-it-works">How It Works</a></li>
+                <li><a href="{{ route('acceuill') }}#cta">Get Started</a></li>
+                <li><a href="#footer">Contact Us</a></li>
             </ul>
         </nav>
     </header>
@@ -75,7 +75,7 @@
             </tbody>
         </table>
     </main>
-<footer>
+<footer id="footer">
     <div class="footer-container">
         <div class="footer-section">
             <h4>About Us</h4>
@@ -115,9 +115,9 @@
         <div class="footer-section">
             <h4>Follow Us</h4>
             <ul class="social-links">
-                <li><a href="#"><img src="facebook-icon.png" alt="Facebook"></a></li>
-                <li><a href="#"><img src="twitter-icon.png" alt="Twitter"></a></li>
-                <li><a href="#"><img src="instagram-icon.png" alt="Instagram"></a></li>
+                <li><a href="#"><img src="{{ asset('image/Facebook.png') }}" alt="Facebook"></a></li>
+                <li><a href="#"><img src="{{ asset('image/Twitter.png') }}" alt="Twitter"></a></li>
+                <li><a href="#"><img src="{{ asset('image/Instagram.png') }}" alt="Instagram"></a></li>
             </ul>
         </div>
     </div>

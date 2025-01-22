@@ -21,18 +21,13 @@ Route::get('/bulletin/{id}', [logicontroller::class, 'generatePDF'])->name('etud
 Route::get('register', [logicontroller::class, 'showFormRegister'])->name('register');
 Route::post('register', [logicontroller::class, 'register'])->name('register.data');
 
+Route::get('/login', [logicontroller::class, 'showFormLogin'])->name('login');
 
-Route::get('politique', [Logicontroller::class, 'showPolitique'])->name('politique');
-Route::post('newsletter/subscribe', [Logicontroller::class, 'subscribeNewsletter'])->name('newsletter.subscribe');
-
+Route::get('/forget password', [logicontroller::class, 'showFormForgetPasswor'])->name('forget_password');
+Route::post('/forget password', [logicontroller::class, 'forget_password'])->name('forget_password.data');
 
 
 
 Route::get('/acceuill', function() {
 	return view('acceuill');
 })->name('acceuill');
-
-
-Route::get('/login', function() {
-	return view('login');
-})->name('login');
