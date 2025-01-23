@@ -52,8 +52,8 @@ This README file provides an overview of the project, including instructions for
 
 1. **Clone the project repository**:
     ```bash
-    git clone https://github.com/your-username/bschool.git
-    cd bschool
+    git clone https://github.com/soumiaelmousstari/alx_final_project.git
+    cd alx_final_project
     ```
 
 2. **Install the dependencies**:
