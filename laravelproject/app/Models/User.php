@@ -1,9 +1,11 @@
 <?php
 
+//Define the namespace for this model to avoid naming conflicts and organize the code.
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+//Import necessary classes from Laravel for authentication and notifications.
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
