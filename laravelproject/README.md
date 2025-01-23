@@ -1,4 +1,5 @@
-<p align="center" font-size=200px color='read'> 🟢 Bschool - Student Management System </p>
+<p style="text-align: center; font-size: 200px; color: red;"> 🟢 Bschool - Student Management System </p>
+
 
 ## 📖 Description
 
