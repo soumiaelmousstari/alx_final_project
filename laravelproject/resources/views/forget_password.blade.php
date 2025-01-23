@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/header_footer.css') }}">
     <title>Formulaire Étudiant</title>
     <script>
-        function validateForm(event) {
+        function validateForm(event){
             const code = document.querySelector('[name="code_utili"]').value.trim();
             const email = document.querySelector('[name="email_utili"]').value.trim();
             const mot_de_pass = document.querySelector('[name="mot_utili"]').value.trim();
@@ -15,10 +15,12 @@
             const codeRegex = /^\d{5}$/;
             if (!mot_de_pass_retrype || !mot_de_pass || !email || isNaN(code) || !codeRegex.test(code)) {
                 event.preventDefault();
-                if (mot_de_pass_retrype != mot_de_pass)
-                    alert("Les mots de passe ne sont pas la meme.");
-                else
-                    alert("Veuillez remplir tous les champs correctement.\n- Le nom est obligatoire.\n- Les notes doivent être des nombres entre 0 et 20.");
+                alert("Veuillez remplir tous les champs correctement.\n- Le nom est obligatoire.\n- Les notes doivent être des nombres entre 0 et 20.");
+            }
+            if (mot_de_pass_retrype !== mot_de_pass)
+            {
+                event.preventDefault()
+                alert("Les mots de passe ne sont pas la meme.");
             }
         }
     </script>
