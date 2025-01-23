@@ -1,4 +1,4 @@
-# 🟢 Bschool - Student Management System
+<p align="center"> 🟢 Bschool - Student Management System </p>
 
 ## 📖 Description
 
